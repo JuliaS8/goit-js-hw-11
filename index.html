@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photo Search</title>
+    <title>Picture Search</title>
     
     <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
     <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-0fc460d7.js">
     <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-4b066c51.css">
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-5d4c459e.css">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-5ce31bac.css">
   </head>
   <body>
     <main>
@@ -16,14 +17,9 @@
         <input type="text" id="search-query" placeholder="Search images..." />
         <button type="submit">Search</button>
       </form>
-      <div id="gallery-container" class="gallery"></div>
+      <div class="loader" id="loader"></div>
+      <div class="gallery" id="gallery"></div>
     </main>
-
-    <div id="image-gallery"></div>
-
-    
-    
     
   </body>
 </html>
-<!DOCTYPE html>
