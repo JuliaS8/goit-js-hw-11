@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photo Search</title>
+    <title>Picture Search</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
@@ -12,14 +13,9 @@
         <input type="text" id="search-query" placeholder="Search images..." />
         <button type="submit">Search</button>
       </form>
-      <div id="gallery-container" class="gallery"></div>
+      <div class="loader" id="loader"></div>
+      <div class="gallery" id="gallery"></div>
     </main>
-
-    <div id="image-gallery"></div>
-
     <script type="module" src="./main.js"></script>
-    <script type="module" src="./js/pixabay-api.js"></script>
-    <script type="module" src="./js/render-functions.js"></script>
   </body>
 </html>
-<!DOCTYPE html>

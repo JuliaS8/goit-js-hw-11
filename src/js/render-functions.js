@@ -1,35 +1,37 @@
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export function renderImages(images) {
-  const galleryContainer = document.getElementById('gallery-container');
-  galleryContainer.innerHTML = '';
+export function renderImages(images, container) {
+  container.innerHTML = '';
 
   images.forEach(image => {
-    const figureElement = document.createElement('figure');
-    figureElement.classList.add('gallery-item');
+    const link = document.createElement('a');
+    link.href = image.largeImageURL;
+    link.classList.add('gallery-item');
 
-    const linkElement = document.createElement('a');
-    linkElement.href = image.largeImageURL;
-
-    const imgElement = document.createElement('img');
-    imgElement.src = image.webformatURL;
-    imgElement.alt = image.tags;
-
-    linkElement.appendChild(imgElement);
-    figureElement.appendChild(linkElement);
+    const img = document.createElement('img');
+    img.src = image.webformatURL;
+    img.alt = image.tags;
 
     const figcaption = document.createElement('figcaption');
     figcaption.textContent = `Likes: ${image.likes}, Views: ${image.views}, Comments: ${image.comments}, Downloads: ${image.downloads}`;
-    figureElement.appendChild(figcaption);
 
-    galleryContainer.appendChild(figureElement);
+    link.appendChild(img);
+    link.appendChild(figcaption);
+    container.appendChild(link);
   });
 
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
+  const gallery = new SimpleLightbox('.gallery a', {
+    captions: false,
     closeText: '×',
     history: false,
   });
-  lightbox.refresh();
+
+  gallery.on('changed.simplelightbox', e => {
+    const prevItem = e.prevItem;
+
+    if (prevItem) {
+      prevItem.content.innerHTML = '';
+    }
+  });
 }

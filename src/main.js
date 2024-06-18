@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const gallery = new SimpleLightbox('.gallery a');
 
   const searchForm = document.getElementById('search-form');
-  const galleryContainer = document.getElementById('gallery-container');
+  const galleryContainer = document.getElementById('gallery');
+  const loader = document.getElementById('loader');
 
   if (searchForm) {
     searchForm.addEventListener('submit', async event => {
@@ -21,16 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
+        loader.classList.add('loader-show');
+
         const images = await fetchImages(query);
         if (images.length === 0) {
           showError(
             'Sorry, there are no images matching your search query. Please try again!'
           );
         } else {
-          renderImages(images);
+          renderImages(images, galleryContainer);
+          gallery.refresh();
         }
       } catch (error) {
         showError('Failed to fetch images. Please try again later.');
+      } finally {
+        loader.classList.remove('loader-show');
       }
     });
   } else {
