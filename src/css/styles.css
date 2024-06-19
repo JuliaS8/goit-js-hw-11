@@ -53,18 +53,26 @@ button:hover {
   display: block;
 }
 
-.image-info {
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px;
-  font-size: 14px;
-  text-align: left;
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  padding-top: 2px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.info-item {
+.info-row {
+  text-align: center;
+}
+
+.info-block strong {
   font-weight: bold;
-  margin-right: 10px;
-  display: inline-block;
+}
+
+.info-block span {
+  display: block;
+  margin-top: 2px;
 }
 
 .gallery-item figcaption {

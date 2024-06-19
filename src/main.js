@@ -1,3 +1,4 @@
+import 'global';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchImages } from './js/pixabay-api.js';
@@ -6,8 +7,6 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const gallery = new SimpleLightbox('.gallery a');
-
   const searchForm = document.getElementById('search-form');
   const galleryContainer = document.getElementById('gallery');
   const loader = document.getElementById('loader');
@@ -23,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         loader.classList.add('loader-show');
+        galleryContainer.innerHTML = '';
 
         const images = await fetchImages(query);
         if (images.length === 0) {
@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
           );
         } else {
           renderImages(images, galleryContainer);
-          gallery.refresh();
         }
       } catch (error) {
         showError('Failed to fetch images. Please try again later.');

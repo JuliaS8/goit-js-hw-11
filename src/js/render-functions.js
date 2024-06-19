@@ -1,25 +1,37 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 export function renderImages(images, container) {
   container.innerHTML = '';
 
-  images.forEach(image => {
-    const link = document.createElement('a');
-    link.href = image.largeImageURL;
-    link.classList.add('gallery-item');
+  const galleryHTML = images
+    .map(
+      image => `
+    <a href="${image.largeImageURL}" class="gallery-item">
+      <img src="${image.webformatURL}" alt="${image.tags}" />
+      <figcaption class="image-info">
+        <div class="info-container">
+          <div class="info-block">
+            <strong>Likes</strong>
+            <span>${image.likes}</span>
+          </div>
+          <div class="info-block">
+            <strong>Views</strong>
+            <span>${image.views}</span>
+          </div>
+          <div class="info-block">
+            <strong>Comments</strong>
+            <span>${image.comments}</span>
+          </div>
+          <div class="info-block">
+            <strong>Downloads</strong>
+            <span>${image.downloads}</span>
+          </div>
+        </div>
+      </figcaption>
+    </a>
+  `
+    )
+    .join('');
 
-    const img = document.createElement('img');
-    img.src = image.webformatURL;
-    img.alt = image.tags;
-
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = `Likes: ${image.likes}, Views: ${image.views}, Comments: ${image.comments}, Downloads: ${image.downloads}`;
-
-    link.appendChild(img);
-    link.appendChild(figcaption);
-    container.appendChild(link);
-  });
+  container.innerHTML = galleryHTML;
 
   const gallery = new SimpleLightbox('.gallery a', {
     captions: false,
