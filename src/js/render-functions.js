@@ -32,18 +32,4 @@ export function renderImages(images, container) {
     .join('');
 
   container.innerHTML = galleryHTML;
-
-  const gallery = new SimpleLightbox('.gallery a', {
-    captions: false,
-    closeText: '×',
-    history: false,
-  });
-
-  gallery.on('changed.simplelightbox', e => {
-    const prevItem = e.prevItem;
-
-    if (prevItem) {
-      prevItem.content.innerHTML = '';
-    }
-  });
 }
